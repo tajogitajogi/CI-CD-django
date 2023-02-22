@@ -15,7 +15,7 @@ jobs:
     - name: Install yc cli
       run: curl https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash -s -- -a
     - name: restart bash
-      run: bash
+      run: echo $PATH
     - name: yc auth
       run: sudo yc config set token ${{ secrets.YCCLI }}
     - name: Push docker image
