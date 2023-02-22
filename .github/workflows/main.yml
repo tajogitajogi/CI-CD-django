@@ -9,15 +9,15 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Build the Docker image
-      run: docker build -t cr.yandex/${{ secrets.YCDOCKERID }}/${{ env.CONT_NAME }}:${{ github.sha }} .
     - name: Install yc cli
       run: sudo curl https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash 
     - name: restart bash
-      run: source /home/runner/.bashrc
+      run: source /home/runner/.bashrc | cat /home/runner/.bashrc
     - name: yc auth
       run: yc config set token ${{ secrets.YCCLI }}
+    - uses: actions/checkout@v2
+    - name: Build the Docker image
+      run: docker build -t cr.yandex/${{ secrets.YCDOCKERID }}/${{ env.CONT_NAME }}:${{ github.sha }} .
     - name: Push docker image
       run: yc container registry configure-docker; docker push cr.yandex/${{ secrets.YCDOCKERID }}/${{ env.CONT_NAME }}:${{ github.sha }}
     
