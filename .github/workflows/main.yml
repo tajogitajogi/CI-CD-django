@@ -17,5 +17,5 @@ jobs:
     - name: yc auth
       run: exec -l $SHELL; yc config set token ${{ secrets.YCCLI }}
     - name: Push docker image
-      run: yc container registry configure-docker; docker push cr.yandex/${{ secrets.YCDOCKERID }}/${{ env.CONT_NAME }}:${{ github.sha }}
+      run: exec -l $SHELL; yc container registry configure-docker; docker push cr.yandex/${{ secrets.YCDOCKERID }}/${{ env.CONT_NAME }}:${{ github.sha }}
     
