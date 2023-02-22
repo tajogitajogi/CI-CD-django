@@ -6,10 +6,17 @@ on:
       - "main"
 
 jobs:
-  install:
+  CI:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Set up docker and ansible
-        run: | 
-          sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+      - name: Build container 
+        run: |
+          using: 'docker'
+          image: 'Dockerfile'
+      - name: Push container
+      
+          
+        
+        
+
