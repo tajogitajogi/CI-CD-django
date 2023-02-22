@@ -6,8 +6,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-       containername: task:$(date +%s)
+       containerdate: task
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image
-      run: docker build -t $containername . 
+      run: docker build -t $containername:${_self.COMMIT_HASH} . 
