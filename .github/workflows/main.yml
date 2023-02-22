@@ -11,8 +11,11 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image
-      run: docker build -t ${{ env.CONT_NAME }}:${{ github.sha }} .
+      run: docker build -t cr.yandex/${{ secrets.YCDOCKERID }}/${{ env.CONT_NAME }}:${{ github.sha }} .
     - name: Install yc cli
       run: sudo curl -sSL https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash
     - name: yc auth
       run: exec -l $SHELL; yc config set token ${{ secrets.YCCLI }}
+    - name: Push docker image
+      run: yc container registry configure-docker; docker push cr.yandex/${{ secrets.YCDOCKERID }}/${{ env.CONT_NAME }}:${{ github.sha }}
+    
