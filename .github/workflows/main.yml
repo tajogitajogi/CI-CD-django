@@ -13,7 +13,7 @@ jobs:
     - name: Build the Docker image
       run: docker build -t cr.yandex/${{ secrets.YCDOCKERID }}/${{ env.CONT_NAME }}:${{ github.sha }} .
     - name: Install yc cli
-      run: sudo curl https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash 
+      run: curl -sSL https://{{ s3-storage-host }}{{ yc-install-path }} | bash
     - name: restart bash
       run: source /home/runner/.bashrc
     - name: yc auth
