@@ -11,8 +11,8 @@ jobs:
       - uses: actions/checkout@v3
       - name: Build container 
         run: |
-          using: 'docker'
-          image: 'Dockerfile'
+          sudo apt update
+  
       - name: Push container
       
           
