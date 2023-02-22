@@ -1,4 +1,7 @@
-name: CI/CA
+name: CI/CD
+env:
+  CONT_NAME: "task"
+  
 on:
   push:
     branches: [ main ]
@@ -8,4 +11,4 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image
-      run: docker build -t task:${{ COMMIT_HASH }} . 
+      run: docker build -t ${{ env.CONT_NAME }}:${{ github.sha }} . 
