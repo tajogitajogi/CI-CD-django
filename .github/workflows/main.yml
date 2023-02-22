@@ -1,17 +1,11 @@
-name: CI/CD
-on: [push]
+name: CI/CA
+on:
+  push:
+    branches: [ main ]
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Build container 
-        run: |
-          sudo apt update
-  
-      - name: Push container
-      
-          
-        
-        
-
+    - uses: actions/checkout@v2
+    - name: Build the Docker image
+      run: docker build -t taskmanager:$(date +%s) . 
