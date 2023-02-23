@@ -15,7 +15,7 @@ jobs:
     - name: Install yc cli
       run: curl https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash -s -- -i /opt/yc -n
     - name: yc auth
-      run:  /opt/yc/bin/yc config set token ${{ secrets.YCCLI }}; /opt/yc/bin/yc container registry configure-docker
+      run:  /opt/yc/bin/yc config set token ${{ secrets.YCCLI }}; /opt/yc/bin/yc config create tajogi; /opt/yc/bin/yc container registry configure-docker
     - name: Push docker image
       run:  /opt/yc/bin/yc container registry configure-docker; docker push cr.yandex/${{ secrets.YCDOCKERID }}/${{ env.CONT_NAME }}:${{ github.sha }}
     
