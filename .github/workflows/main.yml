@@ -17,7 +17,7 @@ jobs:
     - name: yc authzxczxc
       run:  ls /opt/yc/bin 
     - name: yc auth
-      run:  /opt/yc/bin config set token ${{ secrets.YCCLI }}
+      run:  /opt/yc/bin/yc config set token ${{ secrets.YCCLI }}
     - name: Push docker image
-      run:  /opt/yc/bin container registry configure-docker; docker push cr.yandex/${{ secrets.YCDOCKERID }}/${{ env.CONT_NAME }}:${{ github.sha }}
+      run:  /opt/yc/bin/yc container registry configure-docker; docker push cr.yandex/${{ secrets.YCDOCKERID }}/${{ env.CONT_NAME }}:${{ github.sha }}
     
