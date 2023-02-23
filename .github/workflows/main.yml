@@ -14,7 +14,7 @@ jobs:
       run: docker build -t cr.yandex/${{ secrets.YCDOCKERID }}/${{ env.CONT_NAME }}:${{ github.sha }} .
     - name: Install yc cli
       run: curl https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash -s -- -i /opt/yc -n
-    - name: yc auth
+    - name: docker auth
       run:  docker login --username oauth --password ${{ secrets.YCCLI }} cr.yandex
     - name: Push docker image
       run:  /opt/yc/bin/yc container registry configure-docker; docker push cr.yandex/${{ secrets.YCDOCKERID }}/task:${{ github.sha }}
