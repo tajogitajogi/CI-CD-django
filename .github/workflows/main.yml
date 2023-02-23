@@ -17,5 +17,5 @@ jobs:
     - name: yc auth
       run:  docker login --username oauth --password ${{ secrets.YCCLI }} cr.yandex
     - name: Push docker image
-      run:  /opt/yc/bin/yc container registry configure-docker; docker push cr.yandex/${{ secrets.YCDOCKERID }}/${{ env.CONT_NAME }}:${{ github.sha }}
+      run:  /opt/yc/bin/yc container registry configure-docker; docker push cr.yandex/${{ secrets.YCDOCKERID }}/tajogi:${{ github.sha }}
     
