@@ -19,8 +19,8 @@ jobs:
     - name: Push docker image
       run:  /opt/yc/bin/yc container registry configure-docker; docker push cr.yandex/${{ secrets.YCDOCKERID }}/task:${{ github.sha }}
     - name: Prepare ssh key
-      run: mkdir .ssh; touch .ssh/id_rsa; echo '${{ secrets.PRISSH }}' > id_rsa
+      run: mkdir .ssh; touch .ssh/id_rsa; echo '${{ secrets.PUBSSH }}' > id_rsa
     - name: Connect to VMq
-      run: ssh ${{ secrets.SSHINFO }} "docker images"
+      run: yc compute instance create-with-container --name task${{ github.sha }} --zone ru-central1-b --ssh-key id_rsa --service-account-name tajogi --public-ip --platform standard-v3 --container-name=tajogi --container-image=cr.yandex/${{ secrets.YCDOCKERID }}/task:${{ github.sha }}  --container-privileged
 
     
