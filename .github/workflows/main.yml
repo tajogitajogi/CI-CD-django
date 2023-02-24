@@ -19,5 +19,5 @@ jobs:
     - name: Push docker image
       run:  /opt/yc/bin/yc container registry configure-docker; docker push cr.yandex/${{ secrets.YCDOCKERID }}/task:${{ github.sha }}
     - name: create container
-      run : /opt/yc/binyc serverless container create --name cr.yandex/${{ secrets.YCDOCKERID }}/task:${{ github.sha }}
+      run : /opt/yc/bin/yc serverless container create --name cr.yandex/${{ secrets.YCDOCKERID }}/task:${{ github.sha }}
     
