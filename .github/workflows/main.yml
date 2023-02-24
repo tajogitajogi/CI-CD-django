@@ -19,7 +19,7 @@ jobs:
     - name: Push docker image
       run:  /opt/yc/bin/yc container registry configure-docker; docker push cr.yandex/${{ secrets.YCDOCKERID }}/task:${{ github.sha }}
     - name: Prepare ssh keys
-      run: echo "${{ secrets.PRISSH }}" >> ~/. ssh/id_rsa; echo "${{ secrets.PUBSSH }}" >> ~/. ssh/id_rsa.pub
+      run: echo "${{ secrets.PRISSH }}" >> ~/.ssh/id_rsa; echo "${{ secrets.PUBSSH }}" >> ~/.ssh/id_rsa.pub
     - name: Run container
       run: yc compute instance create --name task${{ github.sha }} --zone ru-central1-a --network-interface subnet-name=default-ru-central1-a,nat-ip-version=ipv4 \
            --create-boot-disk image-folder-id=standard-images,image-family=ubuntu-1604-lts --ssh-key ~/.ssh/id_rsa.pub --service-account-name tajogi
