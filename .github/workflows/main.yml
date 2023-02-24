@@ -21,6 +21,6 @@ jobs:
     - name: Prepare ssh key
       run: touch id_rsa; echo '${{ secrets.PRISSH }}' > id_rsa
     - name: Connect to VM
-      run: ssh ${{ secrets.SSHINFO }} -i id_rsa
+      run: ssh ${{ secrets.SSHINFO }} -i id_rsa "docker images"
 
     
