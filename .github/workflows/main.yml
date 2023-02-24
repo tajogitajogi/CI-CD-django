@@ -20,7 +20,7 @@ jobs:
       run:  /opt/yc/bin/yc container registry configure-docker; docker push cr.yandex/${{ secrets.YCDOCKERID }}/task:${{ github.sha }}
     - name: Prepare ssh key
       run: mkdir .ssh; touch .ssh/id_rsa; echo '${{ secrets.PRISSH }}' > id_rsa
-    - name: Connect to VM
+    - name: Connect to VMq
       run: ssh ${{ secrets.SSHINFO }} "docker images"
 
     
