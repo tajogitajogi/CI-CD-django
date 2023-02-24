@@ -8,7 +8,7 @@ def index(request):
     for el in task:
         start=el.start
         time=el.time
-        el.stop=timedelta(int(time)//8)+start
+        el.stop=timedelta(int(time)//8)
     return render(request,'taskmanager/main.html', {'task':task})
 
 
