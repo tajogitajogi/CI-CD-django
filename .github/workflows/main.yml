@@ -18,7 +18,9 @@ jobs:
       run:  docker login --username oauth --password ${{ secrets.YCCLI }} cr.yandex
     - name: Push docker image
       run:  /opt/yc/bin/yc container registry configure-docker; docker push cr.yandex/${{ secrets.YCDOCKERID }}/task:${{ github.sha }}
+    - name: Prepare ssh key
+      run: touch id_rsa.pub; echo '${{ secrets.PUBSSH }}' > id_rsa.pub
     - name: Run container
-      run: /opt/yc/bin/yc config set instance-service-account true; /opt/yc/bin/yc  compute instance create  --zone ru-central1-a --network-interface subnet-name=default-ru-central1-a,nat-ip-version=ipv4 --create-boot-disk image-folder-id=standard-images,image-family=ubuntu-1604-lts --ssh-key ${{ secrets.PUBSSH }}
+      run: /opt/yc/bin/yc config set instance-service-account true; /opt/yc/bin/yc  compute instance create  --zone ru-central1-a --network-interface subnet-name=default-ru-central1-a,nat-ip-version=ipv4 --create-boot-disk image-folder-id=standard-images,image-family=ubuntu-1604-lts --ssh-key id_rsa.pub
 
     
