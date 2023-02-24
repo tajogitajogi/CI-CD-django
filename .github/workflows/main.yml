@@ -18,6 +18,4 @@ jobs:
       run:  docker login --username oauth --password ${{ secrets.YCCLI }} cr.yandex
     - name: Push docker image
       run:  /opt/yc/bin/yc container registry configure-docker; docker push cr.yandex/${{ secrets.YCDOCKERID }}/task:${{ github.sha }}
-    - name: create container
-      run : /opt/yc/bin/yc config set token ${{ secrets.YCDOCKERID }}; /opt/yc/bin/yc serverless container create --name cr.yandex/${{ secrets.YCDOCKERID }}/task:${{ github.sha }}
     
